@@ -1,0 +1,1 @@
+tools\nunit-console.exe /runlist=koans.txt
