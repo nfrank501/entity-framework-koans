@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="about_inheritance.cs" />
+    <Compile Include="AboutInheritance\AboutTablePerClassHierarchyInheritance.cs" />
+    <Compile Include="AboutInheritance\AboutTablePerConcreteClassInheritance.cs" />
+    <Compile Include="AboutInheritance\AboutTablePerTypeInheritance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

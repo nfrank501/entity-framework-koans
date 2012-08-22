@@ -80,6 +80,54 @@ namespace AboutInheritance
             }
         }
         private ObjectSet<Animal> _Animals;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Vehicle> Vehicles
+        {
+            get
+            {
+                if ((_Vehicles == null))
+                {
+                    _Vehicles = base.CreateObjectSet<Vehicle>("Vehicles");
+                }
+                return _Vehicles;
+            }
+        }
+        private ObjectSet<Vehicle> _Vehicles;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Airplane> Airplanes
+        {
+            get
+            {
+                if ((_Airplanes == null))
+                {
+                    _Airplanes = base.CreateObjectSet<Airplane>("Airplanes");
+                }
+                return _Airplanes;
+            }
+        }
+        private ObjectSet<Airplane> _Airplanes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Helicopter> Helicopters
+        {
+            get
+            {
+                if ((_Helicopters == null))
+                {
+                    _Helicopters = base.CreateObjectSet<Helicopter>("Helicopters");
+                }
+                return _Helicopters;
+            }
+        }
+        private ObjectSet<Helicopter> _Helicopters;
 
         #endregion
         #region AddTo Methods
@@ -91,6 +139,30 @@ namespace AboutInheritance
         {
             base.AddObject("Animals", animal);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Vehicles EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToVehicles(Vehicle vehicle)
+        {
+            base.AddObject("Vehicles", vehicle);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Airplanes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAirplanes(Airplane airplane)
+        {
+            base.AddObject("Airplanes", airplane);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Helicopters EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToHelicopters(Helicopter helicopter)
+        {
+            base.AddObject("Helicopters", helicopter);
+        }
 
         #endregion
     }
@@ -99,6 +171,129 @@ namespace AboutInheritance
     #endregion
     
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AboutInheritanceModel", Name="Aircraft")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    [KnownTypeAttribute(typeof(Airplane))]
+    [KnownTypeAttribute(typeof(Helicopter))]
+    public abstract partial class Aircraft : EntityObject
+    {
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AboutInheritanceModel", Name="Airplane")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Airplane : Aircraft
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Airplane object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="engineCount">Initial value of the EngineCount property.</param>
+        public static Airplane CreateAirplane(global::System.Int32 id, global::System.String name, global::System.Int32 engineCount)
+        {
+            Airplane airplane = new Airplane();
+            airplane.Id = id;
+            airplane.Name = name;
+            airplane.EngineCount = engineCount;
+            return airplane;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EngineCount
+        {
+            get
+            {
+                return _EngineCount;
+            }
+            set
+            {
+                OnEngineCountChanging(value);
+                ReportPropertyChanging("EngineCount");
+                _EngineCount = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EngineCount");
+                OnEngineCountChanged();
+            }
+        }
+        private global::System.Int32 _EngineCount;
+        partial void OnEngineCountChanging(global::System.Int32 value);
+        partial void OnEngineCountChanged();
+
+        #endregion
+    
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -144,30 +339,6 @@ namespace AboutInheritance
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Type
-        {
-            get
-            {
-                return _Type;
-            }
-            set
-            {
-                OnTypeChanging(value);
-                ReportPropertyChanging("Type");
-                _Type = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Type");
-                OnTypeChanged();
-            }
-        }
-        private global::System.String _Type;
-        partial void OnTypeChanging(global::System.String value);
-        partial void OnTypeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public global::System.String Name
         {
             get
@@ -186,6 +357,62 @@ namespace AboutInheritance
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AboutInheritanceModel", Name="Car")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Car : Vehicle
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Car object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="gasTankGallons">Initial value of the GasTankGallons property.</param>
+        public static Car CreateCar(global::System.Int32 id, global::System.String name, global::System.Int32 gasTankGallons)
+        {
+            Car car = new Car();
+            car.Id = id;
+            car.Name = name;
+            car.GasTankGallons = gasTankGallons;
+            return car;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 GasTankGallons
+        {
+            get
+            {
+                return _GasTankGallons;
+            }
+            set
+            {
+                OnGasTankGallonsChanging(value);
+                ReportPropertyChanging("GasTankGallons");
+                _GasTankGallons = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GasTankGallons");
+                OnGasTankGallonsChanged();
+            }
+        }
+        private global::System.Int32 _GasTankGallons;
+        partial void OnGasTankGallonsChanging(global::System.Int32 value);
+        partial void OnGasTankGallonsChanged();
 
         #endregion
     
@@ -290,6 +517,185 @@ namespace AboutInheritance
         private Nullable<global::System.Int32> _DogYearsLeft;
         partial void OnDogYearsLeftChanging(Nullable<global::System.Int32> value);
         partial void OnDogYearsLeftChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AboutInheritanceModel", Name="Helicopter")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Helicopter : Aircraft
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Helicopter object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="rotorConfiguration">Initial value of the RotorConfiguration property.</param>
+        public static Helicopter CreateHelicopter(global::System.Int32 id, global::System.String name, global::System.String rotorConfiguration)
+        {
+            Helicopter helicopter = new Helicopter();
+            helicopter.Id = id;
+            helicopter.Name = name;
+            helicopter.RotorConfiguration = rotorConfiguration;
+            return helicopter;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String RotorConfiguration
+        {
+            get
+            {
+                return _RotorConfiguration;
+            }
+            set
+            {
+                OnRotorConfigurationChanging(value);
+                ReportPropertyChanging("RotorConfiguration");
+                _RotorConfiguration = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("RotorConfiguration");
+                OnRotorConfigurationChanged();
+            }
+        }
+        private global::System.String _RotorConfiguration;
+        partial void OnRotorConfigurationChanging(global::System.String value);
+        partial void OnRotorConfigurationChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AboutInheritanceModel", Name="Truck")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Truck : Vehicle
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Truck object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="haulingCapacityTons">Initial value of the HaulingCapacityTons property.</param>
+        public static Truck CreateTruck(global::System.Int32 id, global::System.String name, global::System.Double haulingCapacityTons)
+        {
+            Truck truck = new Truck();
+            truck.Id = id;
+            truck.Name = name;
+            truck.HaulingCapacityTons = haulingCapacityTons;
+            return truck;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double HaulingCapacityTons
+        {
+            get
+            {
+                return _HaulingCapacityTons;
+            }
+            set
+            {
+                OnHaulingCapacityTonsChanging(value);
+                ReportPropertyChanging("HaulingCapacityTons");
+                _HaulingCapacityTons = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("HaulingCapacityTons");
+                OnHaulingCapacityTonsChanged();
+            }
+        }
+        private global::System.Double _HaulingCapacityTons;
+        partial void OnHaulingCapacityTonsChanging(global::System.Double value);
+        partial void OnHaulingCapacityTonsChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="AboutInheritanceModel", Name="Vehicle")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    [KnownTypeAttribute(typeof(Car))]
+    [KnownTypeAttribute(typeof(Truck))]
+    public abstract partial class Vehicle : EntityObject
+    {
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
 
         #endregion
     

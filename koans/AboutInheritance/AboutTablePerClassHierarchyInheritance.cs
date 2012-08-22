@@ -5,10 +5,10 @@ using System.Reflection;
 using NUnit.Framework;
 using AboutInheritance;
 
-namespace koans
+namespace koans.AboutInheritance
 {
     [TestFixture]
-    public class test_creating_table_per_class_hierarchy_inheritance_database_first
+    public class AboutTablePerClassHierarchyInheritance
     {
         private const string AboutInheritanceConnectionString =
             @"data source=.\SQLEXPRESS;attachdbfilename=|DataDirectory|\AboutInheritance.mdf;integrated security=True;user instance=True;multipleactiveresultsets=True;App=EntityFramework";
@@ -73,7 +73,7 @@ namespace koans
         public void verify_animal_class_exists()
         {
             var type = _aboutInheritanceAssembly.GetType("AboutInheritance.Animal");
-            Assert.IsNotNull(type, "Map an animal entity from the animal table in AboutInheritance.edmx");
+            Assert.IsNotNull(type, "Map an animal entity from the Animals table in AboutInheritance.edmx");
         }
 
         [Test]
@@ -192,15 +192,5 @@ namespace koans
 
             Assert.AreEqual(3, dogCount, "Setup the discriminator values for dogs");
         }
-    }
-
-    [TestFixture]
-    public class test_creating_table_per_type_inheritance_database_first
-    {
-    }
-
-    [TestFixture]
-    public class test_creating_table_per_concrete_class_inheritance_database_first
-    {
     }
 }
