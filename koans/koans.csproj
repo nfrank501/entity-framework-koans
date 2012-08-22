@@ -47,6 +47,8 @@
     <Compile Include="AboutInheritance\AboutTablePerClassHierarchyInheritance.cs" />
     <Compile Include="AboutInheritance\AboutTablePerConcreteClassInheritance.cs" />
     <Compile Include="AboutInheritance\AboutTablePerTypeInheritance.cs" />
+    <Compile Include="KoansCore\AboutInheritanceBase.cs" />
+    <Compile Include="KoansCore\TableData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
