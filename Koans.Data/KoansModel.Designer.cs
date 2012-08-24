@@ -17,39 +17,39 @@ using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 
-namespace AboutConcurrencyModeNone
+namespace Koans.Data
 {
     #region Contexts
     
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class AboutConcurrencyModeNoneEntities : ObjectContext
+    public partial class KoansEntities : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new AboutConcurrencyModeNoneEntities object using the connection string found in the 'AboutConcurrencyModeNoneEntities' section of the application configuration file.
+        /// Initializes a new KoansEntities object using the connection string found in the 'KoansEntities' section of the application configuration file.
         /// </summary>
-        public AboutConcurrencyModeNoneEntities() : base("name=AboutConcurrencyModeNoneEntities", "AboutConcurrencyModeNoneEntities")
+        public KoansEntities() : base("name=KoansEntities", "KoansEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new AboutConcurrencyModeNoneEntities object.
+        /// Initialize a new KoansEntities object.
         /// </summary>
-        public AboutConcurrencyModeNoneEntities(string connectionString) : base(connectionString, "AboutConcurrencyModeNoneEntities")
+        public KoansEntities(string connectionString) : base(connectionString, "KoansEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new AboutConcurrencyModeNoneEntities object.
+        /// Initialize a new KoansEntities object.
         /// </summary>
-        public AboutConcurrencyModeNoneEntities(EntityConnection connection) : base(connection, "AboutConcurrencyModeNoneEntities")
+        public KoansEntities(EntityConnection connection) : base(connection, "KoansEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -127,7 +127,7 @@ namespace AboutConcurrencyModeNone
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AboutConcurrencyModeNoneModel", Name="FixedProduct")]
+    [EdmEntityTypeAttribute(NamespaceName="Koans.DataModel", Name="FixedProduct")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class FixedProduct : EntityObject
@@ -254,7 +254,7 @@ namespace AboutConcurrencyModeNone
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AboutConcurrencyModeNoneModel", Name="Product")]
+    [EdmEntityTypeAttribute(NamespaceName="Koans.DataModel", Name="Product")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Product : EntityObject

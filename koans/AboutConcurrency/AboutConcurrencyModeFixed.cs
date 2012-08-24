@@ -12,11 +12,11 @@ namespace koans.AboutConcurrency
         [Test]
         public void test_when_two_users_modify_the_same_fields_on_the_same_record_default()
         {
-            var context1 = GetAboutConcurrencyModeFixedContext();
-            var context2 = GetAboutConcurrencyModeFixedContext();
+            var context1 = GetContext();
+            var context2 = GetContext();
 
-            var product1 = context1.Products.First();
-            var product2 = context2.Products.First();
+            var product1 = context1.FixedProducts.First();
+            var product2 = context2.FixedProducts.First();
 
             product1.Price = 50;
             product2.Price = 76;
@@ -32,11 +32,11 @@ namespace koans.AboutConcurrency
         [Test]
         public void test_when_two_users_modify_the_same_fields_on_the_same_record_call_refresh()
         {
-            var context1 = GetAboutConcurrencyModeFixedContext();
-            var context2 = GetAboutConcurrencyModeFixedContext();
+            var context1 = GetContext();
+            var context2 = GetContext();
 
-            var product1 = context1.Products.First();
-            var product2 = context2.Products.First();
+            var product1 = context1.FixedProducts.First();
+            var product2 = context2.FixedProducts.First();
 
             product1.Price = 50;
             product2.Price = 76;

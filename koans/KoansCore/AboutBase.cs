@@ -1,15 +1,59 @@
 ﻿using System.Data;
+using System.Data.EntityClient;
 using System.Data.SqlClient;
 using System.Text;
+using Koans.Data;
+using NUnit.Framework;
 
 namespace koans.KoansCore
 {
     public abstract class AboutBase
     {
-        protected abstract string GetConnectionString();
-
         protected SqlConnection InitializationConnection { get; set; }
 
+        [SetUp]
+        public void SetupFixture()
+        {
+            InitializationConnection = new SqlConnection(GetConnectionString());
+            InitializationConnection.Open();
+
+            SetupTestData();
+
+            InitializationConnection.Close();
+            InitializationConnection.Dispose();
+        }
+
+        protected abstract void SetupTestData();
+
+
+        protected virtual string GetConnectionString()
+        {
+            var builder = new SqlConnectionStringBuilder
+            {
+                DataSource = @".\SQLEXPRESS",
+                AttachDBFilename = @"|DataDirectory|\Koans.Data.mdf",
+                IntegratedSecurity = true,
+                UserInstance = true,
+                MultipleActiveResultSets = true,
+                ApplicationName = "EntityFramework"
+            };
+
+            return builder.ToString();
+        }
+
+        protected virtual string GetEntitiesConnectionString()
+        {
+            var builder = new EntityConnectionStringBuilder
+                {
+                    ProviderConnectionString = GetConnectionString(),
+                    Provider = "System.Data.SqlClient",
+                    Metadata =
+                        "res://Koans.Data/KoansModel.csdl" +
+                        "|res://Koans.Data/KoansModel.ssdl" +
+                        "|res://Koans.Data/KoansModel.msl"
+                };
+            return builder.ToString();
+        }
 
         protected void DeleteFromTables(params string[] tableNames)
         {
@@ -59,6 +103,10 @@ namespace koans.KoansCore
             }
         }
 
+        protected KoansEntities GetContext()
+        {
+            return new KoansEntities(GetEntitiesConnectionString());
+        }
         
     }
 }

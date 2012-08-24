@@ -17,8 +17,8 @@ namespace koans.AboutConcurrency
         [Test]
         public void test_when_two_users_modify_the_same_fields_on_the_same_record_default ()
         {
-            var context1 = GetAboutConcurrencyModeNoneContext();
-            var context2 = GetAboutConcurrencyModeNoneContext();
+            var context1 = GetContext();
+            var context2 = GetContext();
 
             var product1 = context1.Products.First();
             var product2 = context2.Products.First();
@@ -29,7 +29,7 @@ namespace koans.AboutConcurrency
             context1.SaveChanges();
             context2.SaveChanges();
 
-            var context3 = GetAboutConcurrencyModeNoneContext();
+            var context3 = GetContext();
             var product3 = context3.Products.First();
 
             //Last in wins
@@ -44,8 +44,8 @@ namespace koans.AboutConcurrency
         [Test]
         public void test_when_two_users_modify_the_same_fields_on_the_same_record_call_detect_changes()
         {
-            var context1 = GetAboutConcurrencyModeNoneContext();
-            var context2 = GetAboutConcurrencyModeNoneContext();
+            var context1 = GetContext();
+            var context2 = GetContext();
 
             var product1 = context1.Products.First();
             var product2 = context2.Products.First();
@@ -73,7 +73,7 @@ namespace koans.AboutConcurrency
             Assert.AreEqual(EntityState.Unchanged, state2.State);
 
 
-            var context3 = GetAboutConcurrencyModeNoneContext();
+            var context3 = GetContext();
             var product3 = context3.Products.First();
 
             //Last in wins
@@ -88,8 +88,8 @@ namespace koans.AboutConcurrency
         [Test]
         public void test_when_two_users_modify_different_fields_on_the_same_record()
         {
-            var context1 = GetAboutConcurrencyModeNoneContext();
-            var context2 = GetAboutConcurrencyModeNoneContext();
+            var context1 = GetContext();
+            var context2 = GetContext();
 
             var product1 = context1.Products.First();
             var product2 = context2.Products.First();
@@ -128,7 +128,7 @@ namespace koans.AboutConcurrency
 
             Assert.AreEqual(EntityState.Unchanged, state2.State);
 
-            var context3 = GetAboutConcurrencyModeNoneContext();
+            var context3 = GetContext();
             var product3 = context3.Products.First();
 
             Assert.AreEqual(76m, product3.Price);
@@ -144,8 +144,8 @@ namespace koans.AboutConcurrency
         [Test]
         public void test_when_two_users_modify_different_fields_on_the_same_record_with_detect_changes()
         {
-            var context1 = GetAboutConcurrencyModeNoneContext();
-            var context2 = GetAboutConcurrencyModeNoneContext();
+            var context1 = GetContext();
+            var context2 = GetContext();
 
             var product1 = context1.Products.First();
             var product2 = context2.Products.First();
@@ -185,7 +185,7 @@ namespace koans.AboutConcurrency
 
             Assert.AreEqual(EntityState.Unchanged, state2.State);
 
-            var context3 = GetAboutConcurrencyModeNoneContext();
+            var context3 = GetContext();
             var product3 = context3.Products.First();
 
             Assert.AreEqual(76m, product3.Price);

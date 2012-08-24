@@ -7,23 +7,9 @@ namespace koans.KoansCore
 {
     public abstract class AboutPocoHandlingBase : AboutBase
     {
-
-        protected string AboutPocoHandlingEntitiesConnectionString { get; set; }
-
         [TestFixtureSetUp]
         public void SetupFixture()
         {
-            var builder = new EntityConnectionStringBuilder
-            {
-                ProviderConnectionString = GetConnectionString(),
-                Provider = "System.Data.SqlClient",
-                Metadata =
-                    "res://AboutPocoHandling/AboutPocoHandling.csdl" +
-                    "|res://AboutPocoHandling/AboutPocoHandling.ssdl" +
-                    "|res://AboutPocoHandling/AboutPocoHandling.msl"
-            };
-            AboutPocoHandlingEntitiesConnectionString = builder.ToString();
-
             InitializationConnection = new SqlConnection(GetConnectionString());
             InitializationConnection.Open();
 
@@ -33,7 +19,7 @@ namespace koans.KoansCore
             InitializationConnection.Dispose();
         }
 
-        protected void SetupTestData()
+        protected override void SetupTestData()
         {
             TruncateTables("Products");
 
@@ -57,10 +43,24 @@ namespace koans.KoansCore
             return builder.ToString();
         }
 
+        protected override string GetEntitiesConnectionString()
+        {
+            var builder = new EntityConnectionStringBuilder
+            {
+                ProviderConnectionString = GetConnectionString(),
+                Provider = "System.Data.SqlClient",
+                Metadata =
+                    "res://AboutPocoHandling/AboutPocoHandling.csdl" +
+                    "|res://AboutPocoHandling/AboutPocoHandling.ssdl" +
+                    "|res://AboutPocoHandling/AboutPocoHandling.msl"
+            };
+            return builder.ToString();
+        }
 
-         protected AboutPocoHandlingContext GetContext()
+
+         protected AboutPocoHandlingContext GetPocoContext()
          {
-             return new AboutPocoHandlingContext(AboutPocoHandlingEntitiesConnectionString);
+             return new AboutPocoHandlingContext(GetEntitiesConnectionString());
          }
     }
 }

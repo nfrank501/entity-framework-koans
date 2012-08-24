@@ -7,6 +7,14 @@
     <Schema Namespace="AboutConcurrencyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="AboutConcurrencyModelStoreContainer">
           <EntitySet Name="Products" EntityType="AboutConcurrencyModel.Store.Products" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FixedProducts" EntityType="AboutConcurrencyModel.Store.FixedProducts" store:Type="Views" store:Schema="dbo" store:Name="FixedProducts">
+            <DefiningQuery>SELECT 
+      [FixedProducts].[Id] AS [Id], 
+      [FixedProducts].[Name] AS [Name], 
+      [FixedProducts].[Description] AS [Description], 
+      [FixedProducts].[Price] AS [Price]
+      FROM [dbo].[FixedProducts] AS [FixedProducts]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
         <EntityType Name="Products">
           <Key>
@@ -15,7 +23,19 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
-          <Property Name="Price" Type="decimal" />
+          <Property Name="Price" Type="decimal" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'C:\USERS\NFRANK\DOCUMENTS\GITHUB\ENTITY-FRAMEWORK-KOANS\ABOUTCONCURRENCY\ABOUTCONCURRENCY.MDF.dbo.FixedProducts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="FixedProducts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Price" Type="decimal" Scale="2" />
         </EntityType>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -23,6 +43,7 @@
       <Schema Namespace="AboutConcurrencyModeNoneModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="AboutConcurrencyModeNoneEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="Products" EntityType="AboutConcurrencyModeNoneModel.Product" />
+          <EntitySet Name="FixedProducts" EntityType="AboutConcurrencyModeNoneModel.FixedProduct" />
         </EntityContainer>
         <EntityType Name="Product">
           <Key>
@@ -33,6 +54,15 @@
           <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="Decimal" Name="Price" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="FixedProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="true" ConcurrencyMode="Fixed" />
+          <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="true" ConcurrencyMode="Fixed" />
+          <Property Type="Decimal" Name="Price" Precision="18" Scale="2" ConcurrencyMode="Fixed" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -42,6 +72,16 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="AboutConcurrencyModeNoneModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FixedProducts">
+            <EntityTypeMapping TypeName="AboutConcurrencyModeNoneModel.FixedProduct">
+              <MappingFragment StoreEntitySet="FixedProducts">
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -71,6 +111,7 @@
     <Diagrams>
       <Diagram Name="Model1" >
         <EntityTypeShape EntityType="AboutConcurrencyModeNoneModel.Product" Width="1.5" PointX="0.75" PointY="0.75" Height="1.787985026041667" />
+        <EntityTypeShape EntityType="AboutConcurrencyModeNoneModel.FixedProduct" Width="1.5" PointX="3.375" PointY="0.75" Height="1.7879850260416665" />
       </Diagram>
     </Diagrams>
   </Designer>

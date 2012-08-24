@@ -52,8 +52,6 @@ namespace koans.KoansCore
             InitializationConnection.Dispose();
         }
 
-        protected abstract void SetupTestData();
-
         protected int GetEntityCount(string esqlQuery)
         {
             int count = 0;

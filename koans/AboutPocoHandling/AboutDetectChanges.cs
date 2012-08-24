@@ -14,7 +14,7 @@ namespace koans.AboutConcurrency
         {
             Product entity;
 
-            using (var context = GetContext())
+            using (var context = GetPocoContext())
             {
                 entity = context.Products.First();
 
@@ -36,7 +36,7 @@ namespace koans.AboutConcurrency
         {
             Product entity;
 
-            using (var context = GetContext())
+            using (var context = GetPocoContext())
             {
                 entity = context.Products.First();
 
