@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "koans", "koans\koans.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AboutInheritance", "about_inheritance\AboutInheritance.csproj", "{0B129721-8473-4CE6-B382-D28039DCF2AC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AboutConcurrency", "AboutConcurrency\AboutConcurrency.csproj", "{7907694B-9991-4159-8B56-CE83258894CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AboutPocoHandling", "AboutPocoHandling\AboutPocoHandling.csproj", "{0AB8FAB3-9A36-4F87-8E85-F1B83FEE71D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,14 @@ Global
 		{0B129721-8473-4CE6-B382-D28039DCF2AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B129721-8473-4CE6-B382-D28039DCF2AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B129721-8473-4CE6-B382-D28039DCF2AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7907694B-9991-4159-8B56-CE83258894CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7907694B-9991-4159-8B56-CE83258894CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7907694B-9991-4159-8B56-CE83258894CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7907694B-9991-4159-8B56-CE83258894CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AB8FAB3-9A36-4F87-8E85-F1B83FEE71D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AB8FAB3-9A36-4F87-8E85-F1B83FEE71D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AB8FAB3-9A36-4F87-8E85-F1B83FEE71D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AB8FAB3-9A36-4F87-8E85-F1B83FEE71D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

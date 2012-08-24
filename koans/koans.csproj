@@ -44,10 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutConcurrency\AboutConcurrencyModeNone.cs" />
+    <Compile Include="AboutConcurrency\AboutConcurrencyModeFixed.cs" />
+    <Compile Include="AboutPocoHandling\AboutDetectChanges.cs" />
     <Compile Include="AboutInheritance\AboutTablePerClassHierarchyInheritance.cs" />
     <Compile Include="AboutInheritance\AboutTablePerConcreteClassInheritance.cs" />
     <Compile Include="AboutInheritance\AboutTablePerTypeInheritance.cs" />
+    <Compile Include="KoansCore\AboutBase.cs" />
+    <Compile Include="KoansCore\AboutConcurrencyBase.cs" />
     <Compile Include="KoansCore\AboutInheritanceBase.cs" />
+    <Compile Include="KoansCore\AboutPocoHandlingBase.cs" />
     <Compile Include="KoansCore\TableData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -55,6 +61,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AboutConcurrency\AboutConcurrency.csproj">
+      <Project>{7907694B-9991-4159-8B56-CE83258894CF}</Project>
+      <Name>AboutConcurrency</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AboutPocoHandling\AboutPocoHandling.csproj">
+      <Project>{0AB8FAB3-9A36-4F87-8E85-F1B83FEE71D2}</Project>
+      <Name>AboutPocoHandling</Name>
+    </ProjectReference>
     <ProjectReference Include="..\about_inheritance\AboutInheritance.csproj">
       <Project>{0B129721-8473-4CE6-B382-D28039DCF2AC}</Project>
       <Name>AboutInheritance</Name>
